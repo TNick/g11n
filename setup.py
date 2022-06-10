@@ -234,7 +234,6 @@ class UploadCommand(Command):
                 command = '{0} --password "{1}"'.format(
                     command, REPO_PASSWORD
                 )
-            print(command)
             os.system(command)
 
         self.status('Pushing git tags…')
