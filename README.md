@@ -4,7 +4,7 @@ Internationalization and localization tools.
 Install
 -------
 
-    pip install g11n
+    pip install g11npy
 
 You can also download/clone the source, in which case you have to:
 
