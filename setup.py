@@ -197,18 +197,15 @@ class UploadCommand(Command):
                 PRIVATE_REPO_URL,
                 PRIVATE_REPO_CLIENT_CERT
             )
-            print(command)
             os.system(command)
 
             command = 'devpi login "{0}" --password "{1}"'.format(
                 REPO_USER,
                 REPO_PASSWORD
             )
-            print(command)
             os.system(command)
 
             command = 'devpi upload'
-            print(command)
             os.system(command)
 
         else:
