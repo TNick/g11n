@@ -26,19 +26,19 @@ class G11n(G11nAbstract):
 
     def __init__(self, data: Dict[str, Dict[str, Any]] = None, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.data = data
+        self.data = data if data else {}
 
     def load_language(self, lang: str):
         """
         Asks all the plugins for data about a language and stores the result.
         """
         result = {}
-        for partial in g11n_pm.hook.load_language(lang):
+        for partial in g11n_pm.hook.load_language(lang=lang):
             result.update(partial)
         self.data[lang] = result
         return result
 
-    def tr(self, key, params: Dict[str, Any] = None, lang: str = None):
+    def tr(self, key,lang: str = None, **kwargs):
         # Make sure we have a language.
         if not lang:
             lang = self.default_language
@@ -56,12 +56,12 @@ class G11n(G11nAbstract):
         try:
             for part in parts:
                 data = data[part]
-        except KeyError:
+        except (KeyError, TypeError):
             # We have no such key in our repository.
             return key
 
         # Format resulted string.
-        if params is not None:
-            return data.format(**params)
+        if kwargs:
+            return data.format(**kwargs)
 
         return data

@@ -26,7 +26,7 @@ class G11nAbstract(abc.ABC):
         self.time_zone = time_zone
 
     @abc.abstractmethod
-    def tr(self, key, params: Dict[str, Any] = None, lang: str = None):
+    def tr(self, key, lang: str = None, **kwargs):
         """
         A method that translates a key into a string in a specific language.
 
