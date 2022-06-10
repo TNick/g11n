@@ -1,6 +1,6 @@
 import abc
 import datetime
-from typing import Dict, Any, Union
+from typing import Union
 
 
 class G11nAbstract(abc.ABC):
