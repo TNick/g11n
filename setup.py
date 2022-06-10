@@ -14,7 +14,7 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = 'g11n'
+NAME = 'g11npy'
 DESCRIPTION = 'Internationalization and localization tools.'
 URL = 'https://github.com/TNick/g11n'
 EMAIL = 'nicu.tofan@gmail.com'

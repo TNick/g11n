@@ -1,7 +1,7 @@
 from typing import Dict, Any
 
-from g11n.base import G11nAbstract
-from g11n.hooks import g11n_pm
+from g11npy.base import G11nAbstract
+from g11npy.hooks import g11n_pm
 
 
 class G11n(G11nAbstract):
@@ -38,7 +38,7 @@ class G11n(G11nAbstract):
         self.data[lang] = result
         return result
 
-    def tr(self, key,lang: str = None, **kwargs):
+    def tr(self, key, lang: str = None, **kwargs):
         # Make sure we have a language.
         if not lang:
             lang = self.default_language

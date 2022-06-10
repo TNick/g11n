@@ -1,7 +1,5 @@
 import json
-from typing import Dict, Any
-
-from g11n.base import G11nAbstract
+from g11npy.base import G11nAbstract
 
 
 class G11nNoOp(G11nAbstract):

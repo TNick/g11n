@@ -1,27 +1,22 @@
 import sys
 import unittest
 
-import pluggy
-from mock import patch
-# from g11n.dict_based import G11n
-# from g11n.hooks import g11n_hookimpl, g11n_pm
-
 
 def patched(lang: str):
     return {}
 
 
 def cleanup():
-    if 'g11n.dict_based' in sys.modules:
-        del sys.modules['g11n.dict_based']
-    if 'g11n.hooks' in sys.modules:
-        del sys.modules['g11n.hooks']
+    if 'g11npy.dict_based' in sys.modules:
+        del sys.modules['g11npy.dict_based']
+    if 'g11npy.hooks' in sys.modules:
+        del sys.modules['g11npy.hooks']
 
 
 class TestDict(unittest.TestCase):
     def test_init(self):
         cleanup()
-        from g11n.dict_based import G11n
+        from g11npy.dict_based import G11n
         testee = G11n({'a': {'b': '2'}}, '123', time_zone='456')
         self.assertDictEqual(testee.data, {'a': {'b': '2'}})
         self.assertEqual(testee.default_language, '123')
@@ -29,8 +24,8 @@ class TestDict(unittest.TestCase):
 
     def test_load_language(self):
         cleanup()
-        from g11n.dict_based import G11n
-        from g11n.hooks import g11n_hookimpl, g11n_pm
+        from g11npy.dict_based import G11n
+        from g11npy.hooks import g11n_hookimpl, g11n_pm
         testee = G11n(lang='ab')
         testee.load_language('bc')
         self.assertDictEqual(testee.data, {'bc': {}})
@@ -58,8 +53,8 @@ class TestDict(unittest.TestCase):
 
     def test_tr(self):
         cleanup()
-        from g11n.dict_based import G11n
-        from g11n.hooks import g11n_hookimpl, g11n_pm
+        from g11npy.dict_based import G11n
+        from g11npy.hooks import g11n_hookimpl, g11n_pm
 
         testee = G11n(lang='ab', data={'ab': {}})
         self.assertEqual(testee.tr('a'), 'a')
@@ -75,8 +70,8 @@ class TestDict(unittest.TestCase):
 
     def test_complete(self):
         cleanup()
-        from g11n.dict_based import G11n
-        from g11n.hooks import g11n_hookimpl, g11n_pm
+        from g11npy.dict_based import G11n
+        from g11npy.hooks import g11n_hookimpl, g11n_pm
 
         class Something1:
             @g11n_hookimpl

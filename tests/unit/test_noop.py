@@ -1,6 +1,6 @@
 import unittest
 
-from g11n.noop import G11nNoOp
+from g11npy.noop import G11nNoOp
 
 
 class TestNoOp(unittest.TestCase):
