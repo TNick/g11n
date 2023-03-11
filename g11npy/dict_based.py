@@ -1,7 +1,10 @@
+import logging
 from typing import Dict, Any
 
 from g11npy.base import G11nAbstract
 from g11npy.hooks import g11n_pm
+
+logger = logging.getLogger("g11n")
 
 
 class G11n(G11nAbstract):
@@ -58,10 +61,15 @@ class G11n(G11nAbstract):
                 data = data[part]
         except (KeyError, TypeError):
             # We have no such key in our repository.
+            import traceback
+            prev = traceback.extract_stack()[-2]
+            logger.debug(f"The key {key} was not found in `{prev.line}` at {prev.filename}:{prev.lineno}")
             return key
 
         # Format resulted string.
         if kwargs:
+            if 'params' in kwargs:
+                breakpoint()
             return data.format(**kwargs)
 
         return data

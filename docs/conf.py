@@ -20,8 +20,8 @@ from recommonmark.transform import AutoStructify
 now = datetime.datetime.now()
 sys.path.insert(0, os.path.abspath('..'))
 
-from siscadro_webdata .__version__ import __version__
-from siscadro_webdata.constants import __author__, __package_name__
+from g11npy .__version__ import __version__
+from g11npy.constants import __author__, __package_name__
 
 
 # -- Project information -----------------------------------------------------

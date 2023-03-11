@@ -6,16 +6,14 @@ def patched(lang: str):
     return {}
 
 
-def cleanup():
-    if 'g11npy.dict_based' in sys.modules:
-        del sys.modules['g11npy.dict_based']
-    if 'g11npy.hooks' in sys.modules:
-        del sys.modules['g11npy.hooks']
-
-
 class TestDict(unittest.TestCase):
+    def setUp(self):
+        if 'g11npy.dict_based' in sys.modules:
+            del sys.modules['g11npy.dict_based']
+        if 'g11npy.hooks' in sys.modules:
+            del sys.modules['g11npy.hooks']
+
     def test_init(self):
-        cleanup()
         from g11npy.dict_based import G11n
         testee = G11n({'a': {'b': '2'}}, '123', time_zone='456')
         self.assertDictEqual(testee.data, {'a': {'b': '2'}})
@@ -23,7 +21,6 @@ class TestDict(unittest.TestCase):
         self.assertEqual(testee.time_zone, '456')
 
     def test_load_language(self):
-        cleanup()
         from g11npy.dict_based import G11n
         from g11npy.hooks import g11n_hookimpl, g11n_pm
         testee = G11n(lang='ab')
@@ -52,7 +49,6 @@ class TestDict(unittest.TestCase):
         )
 
     def test_tr(self):
-        cleanup()
         from g11npy.dict_based import G11n
         from g11npy.hooks import g11n_hookimpl, g11n_pm
 
@@ -69,7 +65,6 @@ class TestDict(unittest.TestCase):
         self.assertEqual(testee.tr('a.b', lang='xy'), 'a.b')
 
     def test_complete(self):
-        cleanup()
         from g11npy.dict_based import G11n
         from g11npy.hooks import g11n_hookimpl, g11n_pm
 
