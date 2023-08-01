@@ -70,6 +70,10 @@ class G11n(G11nAbstract):
         if kwargs:
             if 'params' in kwargs:
                 breakpoint()
-            return data.format(**kwargs)
+            try:
+                return data.format(**kwargs)
+            except KeyError as exc:
+                logger.error("Failed to format `%s` with `%s` (missing key: `%s`)", data, kwargs, exc)
+                return data
 
         return data
