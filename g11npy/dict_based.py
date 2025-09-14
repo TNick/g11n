@@ -62,8 +62,22 @@ class G11n(G11nAbstract):
         except (KeyError, TypeError):
             # We have no such key in our repository.
             import traceback
-            prev = traceback.extract_stack()[-2]
-            logger.debug(f"The key {key} was not found in `{prev.line}` at {prev.filename}:{prev.lineno}")
+            stack = traceback.extract_stack()
+            
+            logger.debug(
+                "The translation key `%s` was not found; stack trace:", key
+            )
+            try:
+                for i in range(3):
+                    prev = stack[-(2 + i)]
+                    logger.debug(
+                        "- `%s` at %s:%s",
+                        prev.line,
+                        prev.filename,
+                        prev.lineno
+                    )
+            except IndexError:
+                logger.debug("- no more stack")
             return key
 
         # Format resulted string.
@@ -76,4 +90,4 @@ class G11n(G11nAbstract):
                 logger.error("Failed to format `%s` with `%s` (missing key: `%s`)", data, kwargs, exc)
                 return data
 
-        return data
+        return str(data)
